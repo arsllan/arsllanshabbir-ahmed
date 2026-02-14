@@ -1,0 +1,243 @@
+/* Gift Guide - Minimal, from scratch */
+
+.gg-topbar { background: transparent; }
+.gg-topbar__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+.gg-brand{
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+.gg-tagline{
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.85;
+}
+.gg-topbar__inner .gg-btn--choose{ justify-self: end; }
+
+.gg-hero{
+  background-size: cover;
+  background-position: center;
+  padding: 54px 0 48px;
+}
+.gg-hero__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.gg-hero__title{
+  margin: 0 0 10px;
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+.gg-hero__desc{
+  max-width: 520px;
+  white-space: pre-line;
+  opacity: 0.85;
+  margin-bottom: 18px;
+}
+.gg-hero__note{
+  margin-top: 18px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* Buttons with slide/fade overlay from LEFT */
+.gg-btn{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border: 1px solid #111;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  font-weight: 600;
+}
+.gg-btn__text, .gg-btn__arrow{ position: relative; z-index: 2; }
+.gg-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+  z-index:1;
+}
+.gg-btn:hover::before{
+  transform: scaleX(1);
+  opacity: 1;
+}
+.gg-btn--choose{
+  background: #d8c600;
+  color: #111;
+  border-color: #d8c600;
+}
+.gg-btn--choose::before{ background:#111; }
+.gg-btn--choose:hover{ color:#fff; }
+
+.gg-btn--shop{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+.gg-btn--shop::before{ background:#d8c600; }
+.gg-btn--shop:hover{ color:#111; }
+
+.gg-btn--add{
+  width: 100%;
+  justify-content: center;
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+.gg-btn--add::before{ background:#d8c600; }
+.gg-btn--add:hover{ color:#111; }
+
+/* Grid */
+.gg-grid__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 46px 24px 80px;
+}
+.gg-grid__title{
+  margin: 0 0 22px;
+  font-size: 44px;
+  font-weight: 600;
+}
+.gg-grid__wrap{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.gg-card{
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.gg-card__img{
+  position: relative;
+  background: #eee;
+  overflow: hidden;
+}
+.gg-card__img img{
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  display:block;
+}
+.gg-card__plus{
+  position:absolute;
+  right: 14px;
+  top: 14px;
+  width: 26px;
+  height: 26px;
+  display:grid;
+  place-items:center;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.15);
+  font-weight: 700;
+}
+
+/* Modal */
+.gg-modal[hidden]{ display:none; }
+.gg-modal{ position: fixed; inset: 0; z-index: 9999; }
+.gg-modal__overlay{ position:absolute; inset:0; background: rgba(0,0,0,0.25); }
+.gg-modal__panel{
+  position: relative;
+  width: min(520px, calc(100% - 32px));
+  margin: 8vh auto 0;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+}
+.gg-modal__close{
+  position:absolute;
+  right: 12px;
+  top: 10px;
+  border:none;
+  background: transparent;
+  font-size: 22px;
+  cursor:pointer;
+}
+.gg-modal__content{
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  padding: 18px;
+}
+.gg-modal__img img{
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  display:block;
+  background:#eee;
+}
+.gg-modal__title{ font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.gg-modal__price{ font-size: 16px; margin-bottom: 8px; }
+.gg-modal__desc{ font-size: 12px; opacity: 0.75; margin-bottom: 12px; }
+
+.gg-opt{ margin-bottom: 10px; }
+.gg-opt__label{ font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.gg-opt__row{ display:flex; gap: 10px; flex-wrap: wrap; }
+.gg-chip{
+  border: 1px solid rgba(0,0,0,0.25);
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor:pointer;
+  background:#fff;
+  min-width: 80px;
+  text-align:center;
+}
+.gg-chip[aria-pressed="true"]{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+.gg-select{
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid rgba(0,0,0,0.25);
+  background:#fff;
+  font-size: 12px;
+}
+
+.gg-modal__msg{ margin-top: 10px; font-size: 12px; }
+
+/* Mobile */
+@media (max-width: 768px){
+  .gg-topbar__inner{
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand choose"
+      "tagline tagline";
+  }
+  .gg-brand{ grid-area: brand; }
+  .gg-tagline{ grid-area: tagline; }
+  .gg-topbar__inner .gg-btn--choose{ grid-area: choose; }
+
+  .gg-hero__title{ font-size: 34px; }
+  .gg-grid__title{ font-size: 28px; }
+  .gg-grid__wrap{ grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .gg-card__img img{ height: 190px; }
+
+  .gg-modal__content{ grid-template-columns: 1fr; }
+  .gg-modal__img img{ width: 100%; height: 200px; }
+}

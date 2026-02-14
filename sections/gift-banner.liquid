@@ -1,0 +1,53 @@
+{{ 'gift-guide.css' | asset_url | stylesheet_tag }}
+
+<section class="gg-banner" data-section-id="{{ section.id }}">
+  <div class="gg-topbar">
+    <div class="gg-topbar__inner">
+      <div class="gg-brand">{{ section.settings.brand_text }}</div>
+      <div class="gg-tagline">{{ section.settings.tagline_text }}</div>
+
+      <a class="gg-btn gg-btn--choose" href="{{ section.settings.choose_link }}">
+        <span class="gg-btn__text">{{ section.settings.choose_text }}</span>
+        <span class="gg-btn__arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="gg-hero" style="background-image:url('{{ section.settings.hero_bg | image_url: width: 2400 }}');">
+    <div class="gg-hero__inner">
+      <h1 class="gg-hero__title">{{ section.settings.heading }}</h1>
+      <div class="gg-hero__desc">{{ section.settings.description }}</div>
+
+      <a class="gg-btn gg-btn--shop" href="{{ section.settings.shop_link }}">
+        <span class="gg-btn__text">{{ section.settings.shop_text }}</span>
+        <span class="gg-btn__arrow">→</span>
+      </a>
+
+      <div class="gg-hero__note">{{ section.settings.note_text }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gift Guide - Banner",
+  "settings": [
+    { "type": "text", "id": "brand_text", "label": "Brand text", "default": "TISSO VISON" },
+    { "type": "text", "id": "tagline_text", "label": "Top tagline", "default": "Find the ideal gift for your loved ones." },
+
+    { "type": "text", "id": "choose_text", "label": "Choose button text", "default": "CHOOSE GIFT" },
+    { "type": "url", "id": "choose_link", "label": "Choose button link" },
+
+    { "type": "image_picker", "id": "hero_bg", "label": "Hero background image" },
+
+    { "type": "text", "id": "heading", "label": "Main heading", "default": "The Gift Guide" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Discover Joy: Your Ultimate Holiday Gift Destination.\nExplore our curated selection and find the perfect gifts to delight your loved ones this holiday season." },
+
+    { "type": "text", "id": "shop_text", "label": "Shop button text", "default": "SHOP NOW" },
+    { "type": "url", "id": "shop_link", "label": "Shop button link" },
+
+    { "type": "text", "id": "note_text", "label": "Bottom note", "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL" }
+  ],
+  "presets": [{ "name": "Gift Guide - Banner" }]
+}
+{% endschema %}
