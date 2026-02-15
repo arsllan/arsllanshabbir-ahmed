@@ -1,203 +1,171 @@
-/* =========================================================
-   Gift Guide (From Scratch) - Updated for Figma Header + Hero
-   ========================================================= */
 
-/* Hide default Shopify header on Gift Guide template */
-.gift-guide-hide-header {
+/* Safety: if theme header still exists, hide it on gift guide */
+.template-page-gift-guide header,
+.template-page-gift-guide .header-wrapper,
+.template-page-gift-guide .shopify-section-group-header-group,
+.template-page-gift-guide .shopify-section.section-header,
+.template-page-gift-guide .announcement-bar {
   display: none !important;
 }
 
-/* ---------- Base / helpers ---------- */
-.gg-page,
-.gg-page * {
-  box-sizing: border-box;
+/* Reset spacing the theme may add */
+.template-page-gift-guide main,
+.template-page-gift-guide #MainContent {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
-.gg-page {
-  font-family: inherit;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.gg-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* =========================================================
-   TOPBAR (Figma Header)
-   ========================================================= */
-
-.gg-topbar {
-  position: absolute; /* overlay on hero */
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
+/* ---- Topbar (Figma header) ---- */
+.template-page-gift-guide .gg-topbar {
   background: transparent;
+  position: relative;
+  z-index: 5;
 }
 
-.gg-topbar__inner {
+.template-page-gift-guide .gg-topbar__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 22px 24px;
+  padding: 18px 24px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 16px;
 }
 
-/* Left: Brand */
-.gg-brand {
+.template-page-gift-guide .gg-brand {
   font-weight: 700;
-  letter-spacing: 0.10em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 16px;
-  color: #111;
 }
 
-/* Center: Tagline */
-.gg-tagline {
+.template-page-gift-guide .gg-tagline {
   text-align: center;
   font-size: 14px;
   opacity: 0.85;
-  color: #111;
 }
 
-/* Right button aligned like figma */
-.gg-topbar__inner .gg-btn--choose {
+.template-page-gift-guide .gg-topbar__inner .gg-btn--choose {
   justify-self: end;
 }
 
-/* =========================================================
-   HERO (Background + left content)
-   ========================================================= */
-
-.gg-hero {
-  position: relative;
+/* ---- Hero ---- */
+.template-page-gift-guide .gg-hero {
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  padding: 120px 0 70px; /* top padding to clear topbar */
+  padding: 54px 0 48px;
+  position: relative;
 }
 
-.gg-hero__inner {
+.template-page-gift-guide .gg-hero__inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-.gg-hero__content {
-  max-width: 520px; /* left block width like figma */
+/* Figma left aligned content */
+.template-page-gift-guide .gg-hero__content {
+  max-width: 560px;
 }
 
-/* Title */
-.gg-hero__title {
-  margin: 0 0 14px;
+/* Title like figma */
+.template-page-gift-guide .gg-hero__title {
+  margin: 0 0 10px;
   font-size: 56px;
   line-height: 1.05;
   font-weight: 700;
-  color: #111;
 }
 
-/* Description */
-.gg-hero__desc {
+/* Desc */
+.template-page-gift-guide .gg-hero__desc {
   max-width: 520px;
   white-space: pre-line;
   opacity: 0.85;
-  margin: 0 0 22px;
-  color: #111;
-  font-size: 14px;
-  line-height: 1.55;
+  margin: 0 0 18px;
 }
 
-/* Small note under hero (optional) */
-.gg-hero__note {
+/* Bottom small line */
+.template-page-gift-guide .gg-hero__note {
   margin-top: 18px;
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.60;
-  color: #111;
+  opacity: 0.6;
 }
 
-/* =========================================================
-   BUTTONS (Slide/Fade from LEFT)
-   ========================================================= */
-
-.gg-btn {
+/* ---- Button Animation (Slide/Fade overlay from LEFT) ---- */
+.template-page-gift-guide .gg-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  padding: 12px 20px;
+  padding: 12px 18px;
   border: 1px solid #111;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   user-select: none;
   font-weight: 600;
-  line-height: 1;
-  transition: color 220ms ease, border-color 220ms ease, background 220ms ease;
+  transition: transform 180ms ease;
 }
 
-.gg-btn__text,
-.gg-btn__arrow {
+.template-page-gift-guide .gg-btn:hover {
+  transform: translateY(-1px);
+}
+
+.template-page-gift-guide .gg-btn__text,
+.template-page-gift-guide .gg-btn__arrow {
   position: relative;
   z-index: 2;
 }
 
-.gg-btn::before {
+.template-page-gift-guide .gg-btn::before {
   content: "";
   position: absolute;
   inset: 0;
-  transform: translateX(-102%);
+  transform: translateX(-100%);
   opacity: 0;
-  transition: transform 260ms ease, opacity 260ms ease;
+  transition: transform 220ms ease, opacity 220ms ease;
   z-index: 1;
 }
 
-.gg-btn:hover::before {
+.template-page-gift-guide .gg-btn:hover::before {
   transform: translateX(0);
   opacity: 1;
 }
 
-/* Choose Gift (yellow like figma) */
-.gg-btn--choose {
+/* Yellow header button */
+.template-page-gift-guide .gg-btn--choose {
   background: #d8c600;
   color: #111;
   border-color: #d8c600;
-  min-width: 160px;
 }
 
-.gg-btn--choose::before {
-  background: #111; /* black overlay */
+.template-page-gift-guide .gg-btn--choose::before {
+  background: #111;
 }
 
-.gg-btn--choose:hover {
+.template-page-gift-guide .gg-btn--choose:hover {
   color: #fff;
 }
 
-/* Shop Now (dark) */
-.gg-btn--shop {
+/* Black "Shop now" */
+.template-page-gift-guide .gg-btn--shop {
   background: #111;
   color: #fff;
   border-color: #111;
-  min-width: 170px;
 }
 
-.gg-btn--shop::before {
+.template-page-gift-guide .gg-btn--shop::before {
   background: #d8c600;
 }
 
-.gg-btn--shop:hover {
+.template-page-gift-guide .gg-btn--shop:hover {
   color: #111;
 }
 
-/* Add to cart (modal) */
-.gg-btn--add {
+/* Add to cart */
+.template-page-gift-guide .gg-btn--add {
   width: 100%;
   justify-content: center;
   background: #111;
@@ -205,58 +173,34 @@
   border-color: #111;
 }
 
-.gg-btn--add::before {
+.template-page-gift-guide .gg-btn--add::before {
   background: #d8c600;
 }
 
-.gg-btn--add:hover {
+.template-page-gift-guide .gg-btn--add:hover {
   color: #111;
 }
 
-/* =========================================================
-   HERO left fade-in animation (optional)
-   Add class gg-animate-left to hero content wrapper
-   ========================================================= */
-
-.gg-animate-left {
-  animation: ggFadeLeft 520ms ease forwards;
-}
-
-@keyframes ggFadeLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* =========================================================
-   GRID
-   ========================================================= */
-
-.gg-grid__inner {
+/* ---- Grid ---- */
+.template-page-gift-guide .gg-grid__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 52px 24px 80px;
+  padding: 46px 24px 80px;
 }
 
-.gg-grid__title {
+.template-page-gift-guide .gg-grid__title {
   margin: 0 0 22px;
   font-size: 44px;
   font-weight: 600;
-  color: #111;
 }
 
-.gg-grid__wrap {
+.template-page-gift-guide .gg-grid__wrap {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
 
-.gg-card {
+.template-page-gift-guide .gg-card {
   border: none;
   padding: 0;
   background: transparent;
@@ -264,20 +208,20 @@
   cursor: pointer;
 }
 
-.gg-card__img {
+.template-page-gift-guide .gg-card__img {
   position: relative;
   background: #eee;
   overflow: hidden;
 }
 
-.gg-card__img img {
+.template-page-gift-guide .gg-card__img img {
   width: 100%;
   height: 330px;
   object-fit: cover;
   display: block;
 }
 
-.gg-card__plus {
+.template-page-gift-guide .gg-card__plus {
   position: absolute;
   right: 14px;
   top: 14px;
@@ -289,39 +233,23 @@
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(0, 0, 0, 0.15);
   font-weight: 700;
-  color: #111;
 }
 
-/* =========================================================
-   MODAL
-   ========================================================= */
+/* ---- Modal ---- */
+.template-page-gift-guide .gg-modal[hidden] { display: none; }
+.template-page-gift-guide .gg-modal { position: fixed; inset: 0; z-index: 9999; }
+.template-page-gift-guide .gg-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.25); }
 
-.gg-modal[hidden] {
-  display: none;
-}
-
-.gg-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
-
-.gg-modal__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.gg-modal__panel {
+.template-page-gift-guide .gg-modal__panel {
   position: relative;
   width: min(520px, calc(100% - 32px));
   margin: 8vh auto 0;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
 }
 
-.gg-modal__close {
+.template-page-gift-guide .gg-modal__close {
   position: absolute;
   right: 12px;
   top: 10px;
@@ -331,14 +259,14 @@
   cursor: pointer;
 }
 
-.gg-modal__content {
+.template-page-gift-guide .gg-modal__content {
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 16px;
   padding: 18px;
 }
 
-.gg-modal__img img {
+.template-page-gift-guide .gg-modal__img img {
   width: 160px;
   height: 160px;
   object-fit: cover;
@@ -346,136 +274,58 @@
   background: #eee;
 }
 
-.gg-modal__title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: #111;
-}
+.template-page-gift-guide .gg-modal__title { font-size: 18px; font-weight: 700; margin: 0 0 6px; }
+.template-page-gift-guide .gg-modal__price { font-size: 16px; margin: 0 0 8px; }
+.template-page-gift-guide .gg-modal__desc { font-size: 12px; opacity: 0.75; margin: 0 0 12px; }
 
-.gg-modal__price {
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: #111;
-}
+.template-page-gift-guide .gg-opt { margin-bottom: 10px; }
+.template-page-gift-guide .gg-opt__label { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.template-page-gift-guide .gg-opt__row { display: flex; gap: 10px; flex-wrap: wrap; }
 
-.gg-modal__desc {
-  font-size: 12px;
-  opacity: 0.75;
-  margin-bottom: 12px;
-  color: #111;
-}
-
-.gg-opt {
-  margin-bottom: 10px;
-}
-
-.gg-opt__label {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: #111;
-}
-
-.gg-opt__row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.gg-chip {
-  border: 1px solid rgba(0, 0, 0, 0.25);
+.template-page-gift-guide .gg-chip {
+  border: 1px solid rgba(0,0,0,0.25);
   padding: 8px 10px;
   font-size: 12px;
   cursor: pointer;
   background: #fff;
   min-width: 80px;
   text-align: center;
-  color: #111;
 }
 
-.gg-chip[aria-pressed="true"] {
+.template-page-gift-guide .gg-chip[aria-pressed="true"] {
   background: #111;
   color: #fff;
   border-color: #111;
 }
 
-.gg-select {
+.template-page-gift-guide .gg-select {
   width: 100%;
   padding: 10px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0,0,0,0.25);
   background: #fff;
   font-size: 12px;
 }
 
-.gg-modal__msg {
-  margin-top: 10px;
-  font-size: 12px;
-}
+.template-page-gift-guide .gg-modal__msg { margin-top: 10px; font-size: 12px; }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
+/* ---- Mobile ---- */
 @media (max-width: 768px) {
-  /* Topbar stacks like screenshot */
-  .gg-topbar__inner {
+  .template-page-gift-guide .gg-topbar__inner {
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "brand choose"
       "tagline tagline";
   }
 
-  .gg-brand {
-    grid-area: brand;
-  }
+  .template-page-gift-guide .gg-brand { grid-area: brand; }
+  .template-page-gift-guide .gg-tagline { grid-area: tagline; }
+  .template-page-gift-guide .gg-topbar__inner .gg-btn--choose { grid-area: choose; }
 
-  .gg-tagline {
-    grid-area: tagline;
-    text-align: center;
-    margin-top: 6px;
-  }
+  .template-page-gift-guide .gg-hero__title { font-size: 34px; }
+  .template-page-gift-guide .gg-grid__title { font-size: 28px; }
+  .template-page-gift-guide .gg-grid__wrap { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .template-page-gift-guide .gg-card__img img { height: 190px; }
 
-  .gg-topbar__inner .gg-btn--choose {
-    grid-area: choose;
-    min-width: 140px;
-    padding: 11px 16px;
-  }
-
-  /* Hero smaller */
-  .gg-hero {
-    padding: 110px 0 48px;
-  }
-
-  .gg-hero__title {
-    font-size: 34px;
-  }
-
-  .gg-hero__desc {
-    font-size: 13px;
-  }
-
-  /* Grid 2 columns */
-  .gg-grid__title {
-    font-size: 28px;
-  }
-
-  .gg-grid__wrap {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  .gg-card__img img {
-    height: 190px;
-  }
-
-  /* Modal stacks */
-  .gg-modal__content {
-    grid-template-columns: 1fr;
-  }
-
-  .gg-modal__img img {
-    width: 100%;
-    height: 200px;
-  }
+  .template-page-gift-guide .gg-modal__content { grid-template-columns: 1fr; }
+  .template-page-gift-guide .gg-modal__img img { width: 100%; height: 200px; }
 }
