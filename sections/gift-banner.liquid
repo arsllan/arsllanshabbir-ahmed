@@ -1,28 +1,29 @@
 {{ 'gift-guide.css' | asset_url | stylesheet_tag }}
+
 <section class="gg-banner" style="
   {% if section.settings.bg_image != blank %}
-    --gg-bg:url({{ section.settings.bg_image | image_url: width: 2400 }});
+    --gg-bg: url({{ section.settings.bg_image | image_url: width: 2400 }});
   {% endif %}
 ">
   <div class="gg-banner__inner">
 
-    <!-- Top Header Row (Figma) -->
+    <!-- Topbar (Figma Header) -->
     <div class="gg-topbar">
       <div class="gg-topbar__inner">
         <div class="gg-brand">{{ section.settings.logo_text }}</div>
 
         <div class="gg-tagline">{{ section.settings.top_text }}</div>
 
-        <a class="gg-btn gg-btn--choose" href="{{ section.settings.top_button_link }}">
-          <span class="gg-btn__text">{{ section.settings.top_button_label }}</span>
-          <span class="gg-btn__arrow">→</span>
-        </a>
+        {% if section.settings.top_button_label != blank %}
+          <a class="gg-btn gg-btn--choose" href="{{ section.settings.top_button_link }}">
+            <span class="gg-btn__text">{{ section.settings.top_button_label }}</span>
+            <span class="gg-btn__arrow">→</span>
+          </a>
+        {% endif %}
       </div>
     </div>
 
-
-
-    <!-- Left Content -->
+    <!-- Left content -->
     <div class="gg-content">
       {% if section.settings.heading != blank %}
         <h1 class="gg-title">{{ section.settings.heading }}</h1>
@@ -33,20 +34,19 @@
       {% endif %}
 
       {% if section.settings.cta_label != blank %}
-       <a class="gg-btn gg-btn--dark gg-animate-in" href="{{ section.settings.cta_link }}">
-        <span class="gg-btn__text">{{ section.settings.cta_label }}</span>
-        <span class="gg-btn__arrow">→</span>
-      </a>
+        <a class="gg-btn gg-btn--shop gg-animate-in" href="{{ section.settings.cta_link }}">
+          <span class="gg-btn__text">{{ section.settings.cta_label }}</span>
+          <span class="gg-btn__arrow">→</span>
+        </a>
+      {% endif %}
 
+      {% if section.settings.bottom_caption != blank %}
+        <div class="gg-bottom-caption">{{ section.settings.bottom_caption }}</div>
       {% endif %}
     </div>
 
-    {% if section.settings.bottom_caption != blank %}
-      <div class="gg-bottom-caption">{{ section.settings.bottom_caption }}</div>
-    {% endif %}
   </div>
 </section>
-<script src="{{ 'gift-guide.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

@@ -1,105 +1,89 @@
+/* ===========================
+   Gift Guide - Full CSS (Horizon)
+   =========================== */
 
-/* Hide theme header on this template (works when template is page.gift-guide) */
-.template-page-gift-guide header,
-.template-page-gift-guide .header-wrapper,
-.template-page-gift-guide .shopify-section-group-header-group,
-.template-page-gift-guide .shopify-section.section-header,
-.template-page-gift-guide .announcement-bar {
+/* Hide theme header ONLY on gift guide template */
+body.template-page-gift-guide header,
+body.template-page-gift-guide .header-wrapper,
+body.template-page-gift-guide .shopify-section-group-header-group,
+body.template-page-gift-guide .shopify-section.section-header,
+body.template-page-gift-guide .announcement-bar {
   display: none !important;
 }
 
-/* Remove extra spacing some themes add */
-.template-page-gift-guide main,
-.template-page-gift-guide #MainContent {
+body.template-page-gift-guide main,
+body.template-page-gift-guide #MainContent {
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
 
-/* ---------- Banner / Hero wrapper ---------- */
-.template-page-gift-guide .gg-banner {
-  /* uses --gg-bg from inline style */
-  background-image: var(--gg-bg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* -------- Banner Wrapper -------- */
+.gg-banner {
   position: relative;
+  background: var(--gg-bg) no-repeat center / cover;
+  min-height: 520px;
 }
 
-/* Add the “white/soft” look like figma */
-.template-page-gift-guide .gg-banner::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(255,255,255,0.78);
-  pointer-events:none;
-}
-
-/* Inner container */
-.template-page-gift-guide .gg-banner__inner{
-  position: relative;
-  z-index: 2;
+.gg-banner__inner{
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
-  min-height: 520px;
-  display: flex;
-  flex-direction: column;
+  padding: 18px 24px 44px;
 }
 
-/* ---------- Topbar (Figma header) ---------- */
-.template-page-gift-guide .gg-topbar{
-  padding: 18px 0;
+/* -------- Topbar (Figma header) -------- */
+.gg-topbar{
+  position: relative;
+  z-index: 5;
 }
 
-.template-page-gift-guide .gg-topbar__inner{
+.gg-topbar__inner{
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 16px;
 }
 
-.template-page-gift-guide .gg-brand{
+.gg-brand{
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 16px;
 }
 
-.template-page-gift-guide .gg-tagline{
+.gg-tagline{
   text-align: center;
   font-size: 14px;
   opacity: 0.85;
 }
 
-.template-page-gift-guide .gg-topbar__inner .gg-btn--choose{
+.gg-topbar__inner .gg-btn--choose{
   justify-self: end;
 }
 
-/* ---------- Left content area (Figma) ---------- */
-.template-page-gift-guide .gg-content{
-  max-width: 560px;
-  padding-top: 40px; /* pushes content down like figma */
+/* -------- Left Content (Figma) -------- */
+.gg-content{
+  max-width: 620px;
+  padding-top: 56px;
 }
 
-.template-page-gift-guide .gg-title{
-  margin: 0 0 12px;
+.gg-title{
+  margin: 0 0 10px;
   font-size: 64px;
   line-height: 1.02;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
-.template-page-gift-guide .gg-desc{
-  margin: 0 0 18px;
-  max-width: 520px;
+.gg-desc{
+  max-width: 560px;
   white-space: pre-line;
-  opacity: 0.85;
-  font-size: 15px;
-  line-height: 1.5;
+  opacity: 0.9;
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-/* bottom caption */
-.template-page-gift-guide .gg-bottom-caption{
+.gg-bottom-caption{
   margin-top: 18px;
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -107,8 +91,8 @@
   opacity: 0.65;
 }
 
-/* ---------- Buttons (same animation for header + CTA) ---------- */
-.template-page-gift-guide .gg-btn{
+/* -------- Buttons (animated overlay from LEFT) -------- */
+.gg-btn{
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -119,98 +103,232 @@
   cursor: pointer;
   overflow: hidden;
   user-select: none;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   transition: transform 180ms ease;
-  width: fit-content;
 }
 
-.template-page-gift-guide .gg-btn:hover{
-  transform: translateY(-1px);
-}
+.gg-btn:hover{ transform: translateY(-1px); }
 
-.template-page-gift-guide .gg-btn__text,
-.template-page-gift-guide .gg-btn__arrow{
+.gg-btn__text, .gg-btn__arrow{
   position: relative;
   z-index: 2;
 }
 
-/* sliding overlay from LEFT */
-.template-page-gift-guide .gg-btn::before{
+.gg-btn::before{
   content:"";
   position:absolute;
   inset:0;
   transform: translateX(-100%);
   opacity: 0;
   transition: transform 220ms ease, opacity 220ms ease;
-  z-index: 1;
+  z-index:1;
 }
 
-.template-page-gift-guide .gg-btn:hover::before{
+.gg-btn:hover::before{
   transform: translateX(0);
   opacity: 1;
 }
 
 /* Header yellow button */
-.template-page-gift-guide .gg-btn--choose{
+.gg-btn--choose{
   background: #d8c600;
   color: #111;
   border-color: #d8c600;
 }
+.gg-btn--choose::before{ background:#111; }
+.gg-btn--choose:hover{ color:#fff; }
 
-.template-page-gift-guide .gg-btn--choose::before{
-  background: #111;
-}
-
-.template-page-gift-guide .gg-btn--choose:hover{
-  color: #fff;
-}
-
-/* CTA black button */
-.template-page-gift-guide .gg-btn--dark{
+/* Main CTA black */
+.gg-btn--shop{
   background:#111;
   color:#fff;
   border-color:#111;
 }
+.gg-btn--shop::before{ background:#d8c600; }
+.gg-btn--shop:hover{ color:#111; }
 
-.template-page-gift-guide .gg-btn--dark::before{
-  background:#d8c600;
+/* Fade-in from left animation */
+.gg-animate-in{
+  opacity: 0;
+  transform: translateX(-18px);
+  animation: ggFadeLeft 700ms ease forwards;
 }
-
-.template-page-gift-guide .gg-btn--dark:hover{
-  color:#111;
-}
-
-/* ---------- Figma fade-in from LEFT ---------- */
-@keyframes ggFadeInLeft {
-  from { opacity: 0; transform: translateX(-18px); }
+@keyframes ggFadeLeft{
   to { opacity: 1; transform: translateX(0); }
 }
 
-.template-page-gift-guide .gg-animate-in{
-  animation: ggFadeInLeft 700ms ease both;
+/* -------- Grid Section -------- */
+.gg-grid{
+  background: #fff;
+}
+.gg-grid__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+.gg-grid__title{
+  margin: 0 0 26px;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-/* ---------- Mobile ---------- */
+.gg-grid__wrap{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.gg-card{
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gg-card__img{
+  position: relative;
+  background: #eee;
+  overflow: hidden;
+}
+
+.gg-card__img img{
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display:block;
+}
+
+.gg-card__plus{
+  position:absolute;
+  right: 14px;
+  top: 14px;
+  width: 28px;
+  height: 28px;
+  display:grid;
+  place-items:center;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.15);
+  font-weight: 900;
+}
+
+.gg-card__meta{
+  padding-top: 12px;
+}
+
+.gg-card__name{
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.gg-card__price{
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* -------- Modal -------- */
+.gg-modal[hidden]{ display:none; }
+.gg-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.gg-modal__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.30);
+}
+.gg-modal__panel{
+  position: relative;
+  width: min(560px, calc(100% - 28px));
+  margin: 8vh auto 0;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+}
+.gg-modal__close{
+  position:absolute;
+  right: 12px;
+  top: 10px;
+  border:none;
+  background: transparent;
+  font-size: 22px;
+  cursor:pointer;
+}
+.gg-modal__content{
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  padding: 18px;
+}
+
+.gg-modal__img img{
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  display:block;
+  background:#eee;
+}
+
+.gg-modal__title{
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+.gg-modal__price{
+  font-size: 14px;
+  margin: 0 0 10px;
+  opacity: 0.85;
+}
+.gg-modal__desc{
+  font-size: 12px;
+  opacity: 0.75;
+  margin: 0 0 12px;
+}
+
+.gg-opt{ margin-bottom: 12px; }
+.gg-opt__label{
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.gg-select{
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid rgba(0,0,0,0.25);
+  background:#fff;
+  font-size: 12px;
+}
+
+.gg-modal__msg{
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+/* Mobile */
 @media (max-width: 768px){
-  .template-page-gift-guide .gg-topbar__inner{
+  .gg-banner{ min-height: 420px; }
+
+  .gg-topbar__inner{
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "brand choose"
       "tagline tagline";
   }
-  .template-page-gift-guide .gg-brand{ grid-area: brand; }
-  .template-page-gift-guide .gg-tagline{ grid-area: tagline; text-align:left; }
-  .template-page-gift-guide .gg-topbar__inner .gg-btn--choose{ grid-area: choose; }
+  .gg-brand{ grid-area: brand; }
+  .gg-tagline{ grid-area: tagline; }
+  .gg-topbar__inner .gg-btn--choose{ grid-area: choose; }
 
-  .template-page-gift-guide .gg-banner__inner{
-    min-height: 420px;
-  }
+  .gg-content{ padding-top: 28px; }
+  .gg-title{ font-size: 40px; }
+  .gg-grid__title{ font-size: 28px; }
+  .gg-grid__wrap{ grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .gg-card__img img{ height: 190px; }
 
-  .template-page-gift-guide .gg-content{
-    padding-top: 18px;
-  }
-
-  .template-page-gift-guide .gg-title{
-    font-size: 38px;
-  }
+  .gg-modal__content{ grid-template-columns: 1fr; }
+  .gg-modal__img img{ width: 100%; height: 220px; }
 }
