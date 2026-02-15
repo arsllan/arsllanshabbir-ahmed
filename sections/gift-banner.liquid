@@ -1,30 +1,51 @@
-{{ 'gift-guide.css' | asset_url | stylesheet_tag }}
+<section class="gg-banner" style="
+  {% if section.settings.bg_image != blank %}
+    --gg-bg:url({{ section.settings.bg_image | image_url: width: 2400 }});
+  {% endif %}
+">
+  <div class="gg-banner__inner">
 
-<section class="gg-banner" data-section-id="{{ section.id }}">
-  <div class="gg-topbar">
-    <div class="gg-topbar__inner">
-      <div class="gg-brand">{{ section.settings.brand_text }}</div>
-      <div class="gg-tagline">{{ section.settings.tagline_text }}</div>
+    <!-- Top Header Row (Figma) -->
+    <div class="gg-topbar">
+      <div class="gg-topbar__left">
+        <div class="gg-logo">{{ section.settings.logo_text }}</div>
+      </div>
 
-      <a class="gg-btn gg-btn--choose" href="{{ section.settings.choose_link }}">
-        <span class="gg-btn__text">{{ section.settings.choose_text }}</span>
-        <span class="gg-btn__arrow">→</span>
-      </a>
+      <div class="gg-topbar__center">
+        <div class="gg-topbar__tagline">{{ section.settings.top_text }}</div>
+      </div>
+
+      <div class="gg-topbar__right">
+        {% if section.settings.top_button_label != blank %}
+          <a class="gg-btn gg-btn--yellow gg-btn--arrow" href="{{ section.settings.top_button_link }}">
+            <span>{{ section.settings.top_button_label }}</span>
+            <span class="gg-btn__arrow">→</span>
+          </a>
+        {% endif %}
+      </div>
     </div>
-  </div>
 
-  <div class="gg-hero" style="background-image:url('{{ section.settings.hero_bg | image_url: width: 2400 }}');">
-    <div class="gg-hero__inner">
-      <h1 class="gg-hero__title">{{ section.settings.heading }}</h1>
-      <div class="gg-hero__desc">{{ section.settings.description }}</div>
+    <!-- Left Content -->
+    <div class="gg-content">
+      {% if section.settings.heading != blank %}
+        <h1 class="gg-title">{{ section.settings.heading }}</h1>
+      {% endif %}
 
-      <a class="gg-btn gg-btn--shop" href="{{ section.settings.shop_link }}">
-        <span class="gg-btn__text">{{ section.settings.shop_text }}</span>
-        <span class="gg-btn__arrow">→</span>
-      </a>
+      {% if section.settings.description != blank %}
+        <p class="gg-desc">{{ section.settings.description }}</p>
+      {% endif %}
 
-      <div class="gg-hero__note">{{ section.settings.note_text }}</div>
+      {% if section.settings.cta_label != blank %}
+        <a class="gg-btn gg-btn--dark gg-btn--arrow gg-animate-in" href="{{ section.settings.cta_link }}">
+          <span>{{ section.settings.cta_label }}</span>
+          <span class="gg-btn__arrow">→</span>
+        </a>
+      {% endif %}
     </div>
+
+    {% if section.settings.bottom_caption != blank %}
+      <div class="gg-bottom-caption">{{ section.settings.bottom_caption }}</div>
+    {% endif %}
   </div>
 </section>
 
@@ -32,22 +53,23 @@
 {
   "name": "Gift Guide - Banner",
   "settings": [
-    { "type": "text", "id": "brand_text", "label": "Brand text", "default": "TISSO VISON" },
-    { "type": "text", "id": "tagline_text", "label": "Top tagline", "default": "Find the ideal gift for your loved ones." },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
 
-    { "type": "text", "id": "choose_text", "label": "Choose button text", "default": "CHOOSE GIFT" },
-    { "type": "url", "id": "choose_link", "label": "Choose button link" },
-
-    { "type": "image_picker", "id": "hero_bg", "label": "Hero background image" },
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "TISSO VISION" },
+    { "type": "text", "id": "top_text", "label": "Top center text", "default": "Find the ideal gift for your loved ones." },
+    { "type": "text", "id": "top_button_label", "label": "Top button label", "default": "CHOOSE GIFT" },
+    { "type": "url", "id": "top_button_link", "label": "Top button link" },
 
     { "type": "text", "id": "heading", "label": "Main heading", "default": "The Gift Guide" },
     { "type": "textarea", "id": "description", "label": "Description", "default": "Discover Joy: Your Ultimate Holiday Gift Destination.\nExplore our curated selection and find the perfect gifts to delight your loved ones this holiday season." },
 
-    { "type": "text", "id": "shop_text", "label": "Shop button text", "default": "SHOP NOW" },
-    { "type": "url", "id": "shop_link", "label": "Shop button link" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "SHOP NOW" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
 
-    { "type": "text", "id": "note_text", "label": "Bottom note", "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL" }
+    { "type": "text", "id": "bottom_caption", "label": "Bottom small caption", "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL" }
   ],
-  "presets": [{ "name": "Gift Guide - Banner" }]
+  "presets": [
+    { "name": "Gift Guide - Banner" }
+  ]
 }
 {% endschema %}
