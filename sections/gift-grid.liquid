@@ -1,46 +1,60 @@
 {{ 'gift-guide.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'gift-guide.js' | asset_url }}" defer></script>
 
-<section class="gg-grid" data-section-id="{{ section.id }}">
+<section class="gg-grid">
   <div class="gg-grid__inner">
-    <h2 class="gg-grid__title">{{ section.settings.grid_title }}</h2>
+    <h2 class="gg-grid__title">{{ section.settings.title }}</h2>
 
-    <div class="gg-grid__wrap">
-      {% for block in section.blocks %}
-        {% assign p = block.settings.product %}
-        {% if p != blank %}
+    {% assign col = section.settings.collection %}
+    {% if col == blank %}
+      <p>Please select a collection in this section settings.</p>
+    {% else %}
+      <div class="gg-grid__wrap">
+        {% for product in col.products limit: section.settings.limit %}
+          {% assign first_variant = product.selected_or_first_available_variant %}
+
           <button
             class="gg-card"
             type="button"
-            aria-label="Open {{ p.title }}"
-            data-gg-product='{{ p | json | escape }}'
+            data-gg-product='{
+              "id": {{ product.id | json }},
+              "title": {{ product.title | json }},
+              "url": {{ product.url | json }},
+              "price": {{ first_variant.price | money | json }},
+              "image": {{ product.featured_image | image_url: width: 800 | json }},
+              "variants": {{ product.variants | json }},
+              "options": {{ product.options_with_values | json }},
+              "description": {{ product.description | strip_html | truncate: 140 | json }}
+            }'
           >
             <div class="gg-card__img">
-              {% if p.featured_image %}
+              {% if product.featured_image %}
                 <img
-                  src="{{ p.featured_image | image_url: width: 900 }}"
-                  alt="{{ p.featured_image.alt | escape }}"
+                  src="{{ product.featured_image | image_url: width: 900 }}"
+                  alt="{{ product.title | escape }}"
                   loading="lazy"
                 >
               {% endif %}
               <span class="gg-card__plus">+</span>
             </div>
+            <div class="gg-card__meta">
+              <div class="gg-card__title">{{ product.title }}</div>
+              <div class="gg-card__price">{{ first_variant.price | money }}</div>
+            </div>
           </button>
-        {% else %}
-          <div class="gg-card gg-card--empty">Select a product</div>
-        {% endif %}
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
-  {%- comment -%} Popup skeleton (filled by vanilla JS) {%- endcomment -%}
+  <!-- Figma-style Modal -->
   <div class="gg-modal" hidden>
     <div class="gg-modal__overlay" data-gg-close></div>
 
-    <div class="gg-modal__panel" role="dialog" aria-modal="true" aria-label="Product quick view">
+    <div class="gg-modal__panel" role="dialog" aria-modal="true" aria-label="Product options">
       <button class="gg-modal__close" type="button" aria-label="Close" data-gg-close>×</button>
 
-      <div class="gg-modal__content">
+      <div class="gg-modal__body">
         <div class="gg-modal__img">
           <img src="" alt="" />
         </div>
@@ -50,46 +64,28 @@
           <div class="gg-modal__price"></div>
           <div class="gg-modal__desc"></div>
 
-          <div class="gg-modal__options"></div>
+          <div class="gg-modal__opts"></div>
 
-          <button class="gg-btn gg-btn--add" type="button">
+          <button class="gg-btn gg-btn--add" type="button" data-gg-add>
             <span class="gg-btn__text">ADD TO CART</span>
             <span class="gg-btn__arrow">→</span>
           </button>
 
-          <div class="gg-modal__msg" role="status" aria-live="polite"></div>
+          <div class="gg-modal__msg" aria-live="polite"></div>
         </div>
       </div>
     </div>
   </div>
-
-  <script>
-    window.GG_BONUS_PRODUCT_HANDLE = {{ section.settings.bonus_product.handle | json }};
-  </script>
 </section>
 
 {% schema %}
 {
-  "name": "Gift Guide - Grid + Popup",
+  "name": "Gift Guide - Products",
   "settings": [
-    { "type": "text", "id": "grid_title", "label": "Grid title", "default": "Tisso vison in the wild" },
-    {
-      "type": "product",
-      "id": "bonus_product",
-      "label": "Bonus product (must be Soft Winter Jacket)",
-      "info": "This product will be auto-added when selected options include Black + Medium."
-    }
+    { "type": "text", "id": "title", "label": "Title", "default": "Products" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "min": 3, "max": 24, "step": 1, "label": "Products limit", "default": 9 }
   ],
-  "blocks": [
-    {
-      "type": "product_item",
-      "name": "Grid product",
-      "settings": [
-        { "type": "product", "id": "product", "label": "Product" }
-      ]
-    }
-  ],
-  "max_blocks": 6,
-  "presets": [{ "name": "Gift Guide - Grid + Popup", "blocks": [{ "type": "product_item" }, { "type": "product_item" }, { "type": "product_item" }, { "type": "product_item" }, { "type": "product_item" }, { "type": "product_item" }] }]
+  "presets": [{ "name": "Gift Guide - Products" }]
 }
 {% endschema %}
