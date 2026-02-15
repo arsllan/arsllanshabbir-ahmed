@@ -8,17 +8,18 @@
 
     <!-- Top Header Row (Figma) -->
     <div class="gg-topbar">
-    <div class="gg-topbar__inner">
-      <div class="gg-brand">{{ section.settings.brand_text }}</div>
+      <div class="gg-topbar__inner">
+        <div class="gg-brand">{{ section.settings.logo_text }}</div>
 
-      <div class="gg-tagline">{{ section.settings.tagline_text }}</div>
+        <div class="gg-tagline">{{ section.settings.top_text }}</div>
 
-      <a class="gg-btn gg-btn--choose" href="{{ section.settings.choose_link }}">
-        <span class="gg-btn__text">{{ section.settings.choose_label }}</span>
-        <span class="gg-btn__arrow">→</span>
-      </a>
+        <a class="gg-btn gg-btn--choose" href="{{ section.settings.top_button_link }}">
+          <span class="gg-btn__text">{{ section.settings.top_button_label }}</span>
+          <span class="gg-btn__arrow">→</span>
+        </a>
+      </div>
     </div>
-</div>
+
 
 
     <!-- Left Content -->
@@ -32,10 +33,11 @@
       {% endif %}
 
       {% if section.settings.cta_label != blank %}
-        <a class="gg-btn gg-btn--dark gg-btn--arrow gg-animate-in" href="{{ section.settings.cta_link }}">
-          <span>{{ section.settings.cta_label }}</span>
-          <span class="gg-btn__arrow">→</span>
-        </a>
+       <a class="gg-btn gg-btn--dark gg-animate-in" href="{{ section.settings.cta_link }}">
+        <span class="gg-btn__text">{{ section.settings.cta_label }}</span>
+        <span class="gg-btn__arrow">→</span>
+      </a>
+
       {% endif %}
     </div>
 
