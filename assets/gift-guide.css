@@ -59,6 +59,22 @@ body.template-page-gift-guide #MainContent {
 .gg-topbar__inner .gg-btn--choose{
   justify-self: end;
 }
+/* White panel behind hero text (Figma) */
+.gg-panel{
+  margin-top: 110px;          /* pushes panel down like figma */
+  width: min(640px, 100%);
+  background: rgba(255,255,255,0.92);
+  padding: 28px 28px 22px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 768px){
+  .gg-panel{
+    margin-top: 70px;
+    padding: 18px 16px;
+    background: rgba(255,255,255,0.94);
+  }
+}
 
 /* -------- Left Content (Figma) -------- */
 .gg-content{

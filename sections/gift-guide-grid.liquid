@@ -1,0 +1,109 @@
+{{ 'gift-guide.css' | asset_url | stylesheet_tag }}
+
+<section class="gg-grid">
+  <div class="gg-grid__inner">
+    {% if section.settings.title != blank %}
+      <h2 class="gg-grid__title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% assign coll = section.settings.collection %}
+    {% if coll != blank and coll.products_count > 0 %}
+      <div class="gg-grid__wrap">
+        {% for product in coll.products limit: section.settings.limit %}
+          {% assign pimg = product.featured_image | image_url: width: 900 %}
+          {% assign pdesc = product.description | strip_html | truncate: 140 %}
+          {% assign price = product.price | money %}
+
+          {% capture variants_json %}
+          [
+            {% for v in product.variants %}
+              {
+                "id": {{ v.id | json }},
+                "title": {{ v.title | json }}
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+          {% endcapture %}
+
+          {% capture product_json %}
+          {
+            "title": {{ product.title | json }},
+            "image": {{ pimg | json }},
+            "desc": {{ pdesc | json }},
+            "price": {{ price | json }},
+            "variants": {{ variants_json | strip_newlines }}
+          }
+          {% endcapture %}
+
+          <button
+            type="button"
+            class="gg-card"
+            data-gg-product='{{ product_json | strip_newlines | escape }}'
+          >
+            <div class="gg-card__img">
+              <img src="{{ pimg }}" alt="{{ product.title | escape }}">
+              <div class="gg-card__plus">+</div>
+            </div>
+
+            <div class="gg-card__meta">
+              <div class="gg-card__name">{{ product.title }}</div>
+              <div class="gg-card__price">{{ price }}</div>
+            </div>
+          </button>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Please select a collection in this section settings.</p>
+    {% endif %}
+  </div>
+
+  <!-- Modal -->
+  <div class="gg-modal" id="ggModal" hidden>
+    <div class="gg-modal__overlay"></div>
+
+    <div class="gg-modal__panel" role="dialog" aria-modal="true">
+      <button class="gg-modal__close" type="button" aria-label="Close">×</button>
+
+      <div class="gg-modal__content">
+        <div class="gg-modal__img">
+          <img id="ggModalImg" src="" alt="">
+        </div>
+
+        <div>
+          <div class="gg-modal__title" id="ggModalTitle"></div>
+          <div class="gg-modal__price" id="ggModalPrice"></div>
+          <div class="gg-modal__desc" id="ggModalDesc"></div>
+
+          <div class="gg-opt">
+            <div class="gg-opt__label">Options</div>
+            <select class="gg-select" id="ggVariantSelect"></select>
+          </div>
+
+          <button class="gg-btn gg-btn--shop gg-btn--add" type="button" id="ggAddBtn">
+            <span class="gg-btn__text">ADD TO CART</span>
+            <span class="gg-btn__arrow">→</span>
+          </button>
+
+          <div class="gg-modal__msg" id="ggModalMsg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script src="{{ 'gift-guide.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Gift Guide - Grid",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Products" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "min": 3, "max": 12, "step": 1, "label": "Products to show", "default": 9 }
+  ],
+  "presets": [
+    { "name": "Gift Guide - Grid" }
+  ]
+}
+{% endschema %}

@@ -74,7 +74,7 @@
 
       if (!res.ok) throw new Error('Add to cart failed');
 
-      msgEl.textContent = 'Added to cart ✅';
+      msgEl.textContent = 'Added to cart';
       setTimeout(closeModal, 650);
     } catch (err) {
       msgEl.textContent = 'Could not add to cart. Please try again.';

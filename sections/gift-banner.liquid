@@ -24,26 +24,29 @@
     </div>
 
     <!-- Left content -->
-    <div class="gg-content">
-      {% if section.settings.heading != blank %}
-        <h1 class="gg-title">{{ section.settings.heading }}</h1>
-      {% endif %}
+    <div class="gg-panel gg-animate-in">
+      <div class="gg-content">
+        {% if section.settings.heading != blank %}
+          <h1 class="gg-title">{{ section.settings.heading }}</h1>
+        {% endif %}
 
-      {% if section.settings.description != blank %}
-        <p class="gg-desc">{{ section.settings.description }}</p>
-      {% endif %}
+        {% if section.settings.description != blank %}
+          <p class="gg-desc">{{ section.settings.description }}</p>
+        {% endif %}
 
-      {% if section.settings.cta_label != blank %}
-        <a class="gg-btn gg-btn--shop gg-animate-in" href="{{ section.settings.cta_link }}">
-          <span class="gg-btn__text">{{ section.settings.cta_label }}</span>
-          <span class="gg-btn__arrow">→</span>
-        </a>
-      {% endif %}
+        {% if section.settings.cta_label != blank %}
+          <a class="gg-btn gg-btn--shop" href="{{ section.settings.cta_link }}">
+            <span class="gg-btn__text">{{ section.settings.cta_label }}</span>
+            <span class="gg-btn__arrow">→</span>
+          </a>
+        {% endif %}
 
-      {% if section.settings.bottom_caption != blank %}
-        <div class="gg-bottom-caption">{{ section.settings.bottom_caption }}</div>
-      {% endif %}
+        {% if section.settings.bottom_caption != blank %}
+          <div class="gg-bottom-caption">{{ section.settings.bottom_caption }}</div>
+        {% endif %}
+      </div>
     </div>
+
 
   </div>
 </section>
