@@ -1,4 +1,4 @@
-
+{% assign is_gift_guide = template == 'page.gift-guide' %}
 
 {% liquid
   assign order = 'logo,menu,localization,search,drawer_search,actions'
@@ -275,7 +275,6 @@
 
 <header-component
   id="header-component"
-  {% assign is_gift_guide = template == 'page.gift-guide' %}
   class="{{ class }}{% if is_gift_guide %} gift-guide-hide-header{% endif %}"
   data-theme-color="rgb({{ section.settings.color_scheme_top.settings.background.rgb }})"
   {% if transparent %}
