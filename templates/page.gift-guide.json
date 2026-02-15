@@ -27,6 +27,18 @@
     "grid": {
       "type": "gift-grid",
       "blocks": {
+        "product_item_caiFxb": {
+          "type": "product_item",
+          "settings": {
+            "product": "black-leather-bag"
+          }
+        },
+        "product_item_MQMgyg": {
+          "type": "product_item",
+          "settings": {
+            "product": "classic-leather-jacket"
+          }
+        },
         "product_item_c8Wb6t": {
           "type": "product_item",
           "settings": {
@@ -37,12 +49,6 @@
           "type": "product_item",
           "settings": {
             "product": "dark-denim-top"
-          }
-        },
-        "product_item_MQMgyg": {
-          "type": "product_item",
-          "settings": {
-            "product": "classic-leather-jacket"
           }
         },
         "product_item_GN3Lzj": {
@@ -56,21 +62,15 @@
           "settings": {
             "product": "blue-silk-tuxedo"
           }
-        },
-        "product_item_caiFxb": {
-          "type": "product_item",
-          "settings": {
-            "product": "black-leather-bag"
-          }
         }
       },
       "block_order": [
+        "product_item_caiFxb",
+        "product_item_MQMgyg",
         "product_item_c8Wb6t",
         "product_item_wEVppd",
-        "product_item_MQMgyg",
         "product_item_GN3Lzj",
-        "product_item_HMXGUM",
-        "product_item_caiFxb"
+        "product_item_HMXGUM"
       ],
       "settings": {
         "grid_title": "Tisso vison in the wild",
