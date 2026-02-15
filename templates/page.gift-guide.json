@@ -27,8 +27,9 @@
     "grid": {
       "type": "gift-grid",
       "settings": {
-        "grid_title": "Tisso vison in the wild",
-        "bonus_product": ""
+        "title": "Products",
+        "collection": "the-products",
+        "limit": 9
       }
     }
   },
